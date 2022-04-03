@@ -27,3 +27,7 @@ class Students(models.Model):
 
 class Parents(models.Model):
     _name = "school.parent"
+
+
+class TimeTable(models.Mode):
+    _name = "school.timetable"
