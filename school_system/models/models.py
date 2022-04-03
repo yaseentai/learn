@@ -14,6 +14,7 @@ class Room(models.Model):
 class Subject(models.Model):
     _name = "school.subject"
     name = fields.Char("Name")
+    level=fields.Integer("Level", required=True)
 
 
 class Teachers(models.Model):
