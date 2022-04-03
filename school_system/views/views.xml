@@ -1,0 +1,39 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="school_system.school_class">
+      <field name="name">school class tree</field>
+      <field name="model">school.class</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="school_system.act_main_window">
+      <field name="name">Classes</field>
+      <field name="res_model">school.class</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- Top menu item -->
+
+    <menuitem name="School System" id="school_system.menu_root"/>
+
+    <!-- menu categories -->
+    <!-- <menuitem name="Menu 1" id="school_system.menu_1" parent="school_system.menu_root"/>
+    <menuitem name="Menu 2" id="school_system.menu_2" parent="school_system.menu_root"/> -->
+
+
+
+    <menuitem name="Home" id="school_system.home" parent="school_system.menu_root" action="school_system.act_main_window"/>
+    <!-- <menuitem name="Server to list" id="school_system" parent="school_system.menu_2" action="school_system.action_server"/> -->
+
+  </data>
+</odoo>
