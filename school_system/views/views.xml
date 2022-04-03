@@ -12,12 +12,28 @@
       </field>
     </record>
 
+    <record model="ir.ui.view" id="school_system.subject">
+      <field name="name">school Subject tree</field>
+      <field name="model">school.subject</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="level"/>
+        </tree>
+      </field>
+    </record>
 
     <!-- actions opening views on models -->
 
     <record model="ir.actions.act_window" id="school_system.act_main_window">
       <field name="name">Classes</field>
       <field name="res_model">school.class</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+        <record model="ir.actions.act_window" id="school_system.act_subject_window">
+      <field name="name">Subject</field>
+      <field name="res_model">school.subject</field>
       <field name="view_mode">tree,form</field>
     </record>
 
@@ -31,7 +47,7 @@
     <menuitem name="Menu 2" id="school_system.menu_2" parent="school_system.menu_root"/> -->
 
 
-
+    <menuitem name="Subject" id="school_system.subject" parent="school_system.menu_root" action="school_system.act_subject_window"/>
     <menuitem name="Home" id="school_system.home" parent="school_system.menu_root" action="school_system.act_main_window"/>
     <!-- <menuitem name="Server to list" id="school_system" parent="school_system.menu_2" action="school_system.action_server"/> -->
 
