@@ -19,15 +19,16 @@ class Subject(models.Model):
 
 class Teachers(models.Model):
     _name = "school.teacher"
-
+    name = fields.Char("Name")
 
 class Students(models.Model):
     _name = "school.student"
+    name = fields.Char("Name")
 
 
 class Parents(models.Model):
     _name = "school.parent"
 
 
-class TimeTable(models.Mode):
+class TimeTable(models.Model):
     _name = "school.timetable"

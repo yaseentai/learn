@@ -12,16 +12,37 @@
       </field>
     </record>
 
-    <record model="ir.ui.view" id="school_system.subject">
-      <field name="name">school Subject tree</field>
-      <field name="model">school.subject</field>
-      <field name="arch" type="xml">
-        <tree>
+  <record id="school_system.subject" model="ir.ui.view"> 
+    <field name="name">school Subject Form</field> 
+    <field name="model">school.subject</field>
+    <field name="arch" type="xml"> 
+      <form string="school Subject Form">        
           <field name="name"/>
           <field name="level"/>
-        </tree>
-      </field>
+      </form> 
+    </field> 
+  </record> 
+
+  <record id="school_system.teacher" model="ir.ui.view"> 
+      <field name="name">Teacher</field>
+      <field name="model">school.teacher</field>
+      <field name="arch" type="xml">
+       <form string="school Teacher Form">        
+          <field name="name"/>
+      </form> 
+    </field>
     </record>
+
+      <record id="school_system.student" model="ir.ui.view"> 
+      <field name="name">Student</field>
+      <field name="model">school.student</field>
+      <field name="arch" type="xml">
+       <form string="school Student Form">        
+          <field name="name"/>
+      </form> 
+    </field>
+    </record>
+
 
     <!-- actions opening views on models -->
 
@@ -37,19 +58,29 @@
       <field name="view_mode">tree,form</field>
     </record>
 
+ <record model="ir.actions.act_window" id="school_system.act_teacher_window">
+      <field name="name">Teacher</field>
+      <field name="res_model">school.teacher</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+    <record model="ir.actions.act_window" id="school_system.act_student_window">
+      <field name="name">Student</field>
+      <field name="res_model">school.student</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+       
 
     <!-- Top menu item -->
 
-    <menuitem name="School System" id="school_system.menu_root"/>
+    <menuitem name="The School System" id="school_system.menu_root"/>
+    <menuitem name="Home" id="school_system.home" parent="school_system.menu_root" action="school_system.act_main_window" sequence="1" />
+    <menuitem name="Subject" id="school_system.subject" parent="school_system.menu_root" action="school_system.act_subject_window" sequence="2"/>
+    <menuitem name="Teacher" id="school_system.teacher" parent="school_system.menu_root" action="school_system.act_teacher_window" sequence="3"/>
+    <menuitem name="Student" id="school_system.student" parent="school_system.menu_root" action="school_system.act_student_window" sequence="4"/>
 
-    <!-- menu categories -->
-    <!-- <menuitem name="Menu 1" id="school_system.menu_1" parent="school_system.menu_root"/>
-    <menuitem name="Menu 2" id="school_system.menu_2" parent="school_system.menu_root"/> -->
 
-
-    <menuitem name="Subject" id="school_system.subject" parent="school_system.menu_root" action="school_system.act_subject_window"/>
-    <menuitem name="Home" id="school_system.home" parent="school_system.menu_root" action="school_system.act_main_window"/>
-    <!-- <menuitem name="Server to list" id="school_system" parent="school_system.menu_2" action="school_system.action_server"/> -->
+  
 
   </data>
 </odoo>
