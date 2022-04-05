@@ -14,7 +14,7 @@ class Room(models.Model):
 class Subject(models.Model):
     _name = "school.subject"
     name = fields.Char("Name")
-    level=fields.Integer("Level", required=True)
+    level = fields.Integer("Level", required=True)
 
 
 class Teachers(models.Model):
@@ -29,5 +29,5 @@ class Parents(models.Model):
     _name = "school.parent"
 
 
-class TimeTable(models.Mode):
+class TimeTable(models.Model):
     _name = "school.timetable"
