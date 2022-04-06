@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 
 class Room(models.Model):
@@ -10,6 +11,16 @@ class Room(models.Model):
     capacity = fields.Integer("Capacity")
     locacation = fields.Char("Location")
 
+    student_ids = fields.One2many(
+        comodel_name="school.student", inverse_name="room_id", string="Students"
+    )
+
+    @api.onchange("student_ids", "capacity")
+    def check_capacity(self):
+        num_students = len(self.student_ids.ids)
+        if num_students > self.capacity:
+            raise ValidationError("Cannot add Students more than capacity")
+
 
 class Subject(models.Model):
     _name = "school.subject"
@@ -17,17 +28,37 @@ class Subject(models.Model):
     level = fields.Integer("Level", required=True)
 
 
+class Partner(models.Model):
+    _inherit = "res.partner"
+
+    is_student = fields.Boolean("Student ?", default=False)
+
+
 class Teachers(models.Model):
     _name = "school.teacher"
     name = fields.Char("Name")
 
+
 class Students(models.Model):
     _name = "school.student"
-    name = fields.Char("Name")
+
+    _inherits = {"res.partner": "partner_id"}
+
+    partner_id = fields.Many2one(
+        "res.partner", "Partner", delegate=True, ondelete="cascade", required=True
+    )
+
+    room_id = fields.Many2one(comodel_name="school.class", string="Class")
 
 
 class Parents(models.Model):
     _name = "school.parent"
+
+    _inherits = {"res.partner": "partner_id"}
+
+    partner_id = fields.Many2one(
+        "res.partner", "Partner", delegate=True, ondelete="cascade", required=True
+    )
 
 
 class TimeTable(models.Model):
