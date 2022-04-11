@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import datetime
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
@@ -49,6 +50,20 @@ class Students(models.Model):
     )
 
     room_id = fields.Many2one(comodel_name="school.class", string="Class")
+
+    dob = fields.Date(string="D.O.B")
+
+    age = fields.Integer(string="Age", compute="_compute_age", store=True)
+
+    @api.depends("dob")
+    def _compute_age(self):
+        for student in self:
+            date_of_now = datetime.datetime.now().date().year
+
+            if student.dob:
+                student.age = date_of_now - student.dob.year
+            else:
+                student.age = 0
 
 
 class Parents(models.Model):
